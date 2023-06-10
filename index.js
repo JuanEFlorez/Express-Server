@@ -1,32 +1,46 @@
 const express = require("express");
-const app = express();
 const port = 3000;
+const app = express();
 
 const taskList = [
   {
     id: 1,
-    taskName: "TASK 1",
-    taskDescription: "Task 1 Description",
-    taskCompleted: false,
+    taskname: "Task1",
+    description: "description task 1",
+    isCompleted: false,
   },
   {
     id: 2,
-    taskName: "TASK 2",
-    taskDescription: "Task 2 Description",
-    taskCompleted: true,
+    taskname: "Task2",
+    description: "description task 2",
+    isCompleted: true,
   },
   {
     id: 3,
-    taskName: "TASK 4",
-    taskDescription: "Task 3 Description",
-    taskCompleted: false,
+    taskname: "Task3",
+    description: "description task 3",
+    isCompleted: false,
+  },
+  {
+    id: 4,
+    taskname: "Task4",
+    description: "description task 4",
+    isCompleted: true,
   },
 ];
+
+const listViewRouter = require("./list-view-router")(taskList); //Aquí se le pasa el parámetro tasklist al router listViewRouter
+const listEditRouter = require("./list-edit-router")(taskList);
+
+app.use("/list-view", listViewRouter);
+app.use("/list-edit", listEditRouter);
+
+app.listen(port, () => {
+  console.log(`server listening in port ${3000}`);
+});
 
 app.get("/tasks", (req, res) => {
   res.json(taskList);
 });
 
-app.listen(port, () => {
-  console.log("Servidor funcionando en el puerto:", port);
-});
+module.exports = app;
