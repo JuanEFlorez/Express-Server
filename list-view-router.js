@@ -13,6 +13,7 @@ module.exports = (taskList) => {
   // Ruta GET para obtener las tareas incompletas
   listViewRouter.get("/incomplete", (req, res) => {
     // Filtrar las tareas incompletas en base a la propiedad 'isCompleted'
+    console.log("Hola Mundo", taskList);
     const incompleteTasks = taskList.filter(
       (task) => task.isCompleted === false
     );
